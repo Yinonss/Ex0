@@ -3,8 +3,6 @@ package myMath;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.function.Predicate;
-
 import myMath.Monom;
 /**
  * This class represents a Polynom with add, multiply functionality, it also should support the following:
@@ -12,7 +10,7 @@ import myMath.Monom;
  * 2. Finding a numerical value between two values (currently support root only f(x)=0).
  * 3. Derivative
  * 
- * @author Boaz
+ * @author Yinon
  *
  */
 public class Polynom implements Polynom_able{
@@ -61,7 +59,6 @@ public class Polynom implements Polynom_able{
 		else
 		    end=i;
 		String cut=s.substring(start,end);
-		
 	Monom check=stringCheck(cut);
 	if(check!=null)
 		this.add(check);
@@ -232,10 +229,12 @@ public class Polynom implements Polynom_able{
     	while(m.hasNext()) {
     		Monom check=new Monom (m.next());
     		try {
-    		if(check.derivative().equals(check)) {
+    		Monom check1=new Monom(check);
+    		check.derivative();
+    		if(check1.equals(check)) {
     			System.out.println("Error!cannot compute monom with power below 1.");
     			return null; }
-    		 der.add(check.derivative());	
+    		 der.add(check);	
     		}
     	 catch(Exception e) {
     		System.out.println("Error!cannot compute monom with power below 1.");
@@ -256,14 +255,17 @@ public class Polynom implements Polynom_able{
     		sum=sum+m.next().f(x);
     	return sum;
     }
+    
     /**Iterator function:
      * Sorts the ArrayList using Monom_Comperator class.
      * @return Iterartor<Monom>
      */
+    
     public Iterator<Monom> iteretor(){
     	   Collections.sort(this.poly , new Monom_Comperator());
     	return this.poly.iterator();
     }
+    
     /**This function returning a polynom as a string.
      * If it function adds '+' to the string only
      * if it positive (the monom).
@@ -324,12 +326,15 @@ public class Polynom implements Polynom_able{
 	 * @return the approximated area above X-axis below this function bounded in the range of [x0,x1]
 	 */
     public double area(double x0, double x1, double eps) {		
-    	double a=0,i=x0;
-    	while(i<x1) {
-    		if(0<=f(i))
-    			a=a+f(i)*eps;
-    		i=i+eps; }
+    	
+    	double a=0,i=0;
+    	while(i<(x1-x0)/eps) {
+    		a=a+f(i*eps+x0)*eps;
+    		i++; }
     	return a;
-    	}
+    }
+    
+    
+    
 }
 

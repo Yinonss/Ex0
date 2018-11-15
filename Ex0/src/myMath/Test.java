@@ -11,7 +11,9 @@ public abstract class Test {
 		testA();
 		
 	}
-	
+	/**This function testing polynom class' methods.
+	 * 
+	 */
 	public static void testA() {
  
 		//String constructor test:
@@ -71,7 +73,7 @@ public abstract class Test {
 		System.out.println();
 
 		
-		System.out.println("subtract test");
+		System.out.println("Subtract test");
 		// Subtract test:
 		mathPoly1.substract(mathPoly2);
 		System.out.println("Print : 8.2*x^1-0.2*x^2+4*x^3 -> "+mathPoly1.toString());
@@ -90,9 +92,9 @@ public abstract class Test {
 	    Polynom_able areaTester=new Polynom("2*x^0-3*x^2+1*x^3");
      	double eps=0.0000001;
     	System.out.println("Print :1.25 -> "+areaTester.area(0, 1, eps));
-    	System.out.println("Print :0.36 -> "+areaTester.area(0.5, 1.5, eps));
-    	System.out.println("Print :0 -> "+areaTester.area(7, 4, eps));
-        System.out.println();
+    	System.out.println("Print :-64.4 -> "+areaTester.area(-6.1, -5.9, eps));
+    	System.out.println("Print :263 -> "+areaTester.area(4, 7, eps));
+    	
    
         //Root test:
         System.out.println("Root test:");
@@ -101,6 +103,15 @@ public abstract class Test {
         System.out.println("Print : -2.12 -> "+rootTester.root(-0.5, 10, eps));
         System.out.println("Print : 0 -> "+rootTester.root(0, 2, eps));
         System.out.println("Print : 8.515 -> "+rootTester.root(-1,2 , eps));
-        
+        System.out.println();
+       
+        //Graph test:
+        Polynom_able p=new Polynom ("0.2*x^4-1.5*x^3+3.0*x^2-1*x^1-5*x^0");
+	    System.out.println("Graph test:");
+	    drawFunction frame = new drawFunction(p);
+	    frame.setVisible(true);    
+	    
+	  
+		
 	}
 }

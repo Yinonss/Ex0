@@ -59,20 +59,18 @@ public class Monom implements function{
 		return this.get_coefficient()*Math.pow(x, this.get_power());
 	}
 	/**This function computes the monom's derivative.
-	 * the power of the monom must be positive.
-	 * @return The monom's derivative (Monom type).
+	 * The power of the monom must be positive.
 	 */
 	
-	public Monom derivative() {
+	public void derivative() {
 		Double coe;
 		int pow;
 		if(this.get_power()>0) {
 			coe=this.get_coefficient()*(double)this.get_power();
 			pow=this.get_power()-1;
-			Monom der=new Monom(coe,pow);
-			return der;
+			this.set_coefficient(coe);
+			this.set_power(pow);
 		}
-		return new Monom(this.get_coefficient(),this.get_power());
 	}
 	
 	
@@ -145,7 +143,11 @@ public class Monom implements function{
 	public int get_power() {
 		return this._power;
 	}
-	
+	/**This function returns the monom as a string.
+	 */
+	public String toString() {
+		return this.get_coefficient()+"*x^"+this.get_power();
+	}
 	
 	private double _coefficient; // 
 	private int _power; 
